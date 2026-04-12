@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'services/user_state.dart';
 import 'views/splash_screen.dart';
 import 'views/login_screen.dart';
 import 'views/onboarding_screen.dart';
@@ -10,7 +12,12 @@ import 'views/money_pillar.dart';
 import 'views/academy_pillar.dart';
 
 void main() {
-  runApp(const SoloLevelingApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => UserState(),
+      child: const SoloLevelingApp(),
+    ),
+  );
 }
 
 class SoloLevelingApp extends StatelessWidget {

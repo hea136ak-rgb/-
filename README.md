@@ -1,4 +1,6 @@
-# Solo Leveling: Self-Improvement App
+# Solo Leveling: Self-Improvement App (PRIVATE & CONFIDENTIAL)
+
+⚠️ **CONFIDENTIALITY NOTICE:** This project is private and must not be shared or published without explicit permission.
 
 An epic self-improvement app inspired by the "Solo Leveling" anime, designed to turn your life into a multi-layered adventure.
 

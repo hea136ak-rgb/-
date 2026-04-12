@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../services/user_state.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -45,28 +47,39 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildStatsCard() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
-        border: Border.all(color: Colors.blueAccent.withOpacity(0.5)),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: const Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Consumer<UserState>(
+      builder: (context, userState, child) {
+        final stats = userState.stats;
+        return Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: const Color(0xFF1A1A1A),
+            border: Border.all(color: Colors.blueAccent.withOpacity(0.5)),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
             children: [
-              Text('RANK: E | رتبة', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-              Text('LEVEL: 1 | مستوى', style: TextStyle(color: Colors.blueAccent, fontSize: 16)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('RANK: ${stats.rank.name} | رتبة',
+                      style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text('LEVEL: ${stats.level} | مستوى',
+                      style: const TextStyle(color: Colors.blueAccent, fontSize: 16)),
+                ],
+              ),
+              const SizedBox(height: 16),
+              LinearProgressIndicator(
+                  value: stats.xp / stats.nextLevelXp,
+                  backgroundColor: Colors.black,
+                  color: Colors.blueAccent),
+              const SizedBox(height: 8),
+              Text('XP: ${stats.xp} / ${stats.nextLevelXp}',
+                  style: const TextStyle(color: Colors.grey, fontSize: 12)),
             ],
           ),
-          SizedBox(height: 16),
-          LinearProgressIndicator(value: 0.2, backgroundColor: Colors.black, color: Colors.blueAccent),
-          SizedBox(height: 8),
-          Text('XP: 20 / 100', style: TextStyle(color: Colors.grey, fontSize: 12)),
-        ],
-      ),
+        );
+      },
     );
   }
 
